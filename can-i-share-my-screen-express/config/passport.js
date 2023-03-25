@@ -11,7 +11,7 @@ passport.use(new GoogleStrategy(
         callbackURL: process.env.GOOGLE_CALLBACK
     },
     // upon authenticating, calls this callback function
-    async function (accessToken, refreshToken, profile, cb) {
+    async function(accessToken, refreshToken, profile, cb) {
         // profile contains "id", "displayName", "emails", and "photos"
         try {
             // checks to see if a user exists with a promise
@@ -35,15 +35,16 @@ passport.use(new GoogleStrategy(
         } catch (err) {
             return cb(err);
         }
+    }
+));
 
         // I'm not 100% sure what these are doing, let's talk it out!
 
-        passport.serializeUser(function(user, cb) {
-            cb(null, user._id);
-        });
+passport.serializeUser(function(user, cb) {
+    cb(null, user._id);
+});
 
-        passport.deserializeUser(async function(userId, cb) {
-            cb(null, await User.findById(userId));
-        })
-    }
-))
+passport.deserializeUser(async function(userId, cb) {
+    cb(null, await User.findById(userId));
+})
+    

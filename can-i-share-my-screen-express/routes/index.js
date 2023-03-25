@@ -7,10 +7,14 @@ const passport = require('passport');
 // we want to make sure a user is logged in
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-/* GET home page. */
+/* GET landing page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'CISMS' });
 });
+
+router.get('/all', function(req, res, next) {
+  res.render('posts/index', { title : 'CISMS'})
+})
 
 
 // Google OAuth login
