@@ -11,14 +11,19 @@
     </div>
     <%post.comments.forEach(function(comment){ %>
     <section>
-        <div>contents</div>
-       <div> <%= comment.contents %> </div>
+      <div>contents</div>
+      <div> <%= comment.contents %> </div>
+      <form action="/posts/<%= post._id %>/comments?_method=DELETE" method="POST">
+        <input style="display: none" name="commentId" value="<%= comment._id %>">
+        <button type="submit">X</button>
+      </form>
+      </form>
+       
     </section>
     <% }); %>
-    <form method="POST" action="/posts/<%= post._id %>/comments">
+    <form method="POST" action="/posts/<%= post._id %>/comments/">
         <div>add comment</div>
-        <textarea name="contents">
-        </textarea>
+        <textarea name="contents"></textarea>
         <button type="submit"> Add comment</button>
     </form>
 

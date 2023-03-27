@@ -6,7 +6,7 @@ const Post = require('../models/post')
 
 module.exports = {
     addComment,
-
+    deleteOneComment
 }
 
 async function addComment(req, res) {
@@ -20,7 +20,23 @@ async function addComment(req, res) {
       const updatedPost = await post.save();
       res.redirect(`/posts/${updatedPost._id}`);
     } catch (err) {
-      console.error(err);
+      console.log(err);
       res.status(500).send(err.message);
     }
-  }
+}
+
+async function deleteOneComment(req, res, next) {
+  Post.findById(req.params.id).then(function(post) {
+    if (!post) return res.redirect('/posts/all');
+    console.log(req.body, post.comments);
+    post.comments.remove(req.body.commentId);
+    console.log(post.comments);
+    post.save().then(function() {
+      res.redirect(`/posts/${post._id}`);
+    }).catch(function(err) {
+      // Let Express display an error
+      console.log(err);
+      return next(err);
+    });
+  })
+}
