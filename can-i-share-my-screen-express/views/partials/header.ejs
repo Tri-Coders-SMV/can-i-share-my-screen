@@ -11,7 +11,7 @@
 
     <nav>
         <!-- <img src="**** add our logo img source here"> *** -->
-        <a href="/all" <%- title === 'All Posts' ? 'class="active"' : '' %>>ALL POSTS</a>
+        <a href="/posts/all" <%- title === 'All Posts' ? 'class="active"' : '' %>>ALL POSTS</a>
         <% if (user) { %>
           <!-- <img src="" user avatar -->
           <h2 <%-- title === 'Username' ? 'class="active"' : '' %>><%= user.name %></h2>

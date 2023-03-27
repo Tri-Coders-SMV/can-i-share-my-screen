@@ -9,5 +9,7 @@ const router = express.Router();
 const commentsCtrl = require('../controllers/comments')
 
 //router.post('/movies/:id/reviews', postsCtrl.create)
+router.post('/:id/comments', commentsCtrl.addComment);
+
 
 module.exports = router;

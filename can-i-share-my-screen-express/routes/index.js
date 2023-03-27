@@ -32,8 +32,8 @@ router.get('/oauth2callback', passport.authenticate(
   'google',
   {
     // *** we could potentially name the main post page 'all'
-    successRedirect: '/all',
-    failureRedirect: '/all'
+    successRedirect: '/posts/all',
+    failureRedirect: '/posts/all'
   }
 ));
 
@@ -41,7 +41,7 @@ router.get('/logout', function(req, res) {
   // logs the user out of the current oauth & provides
   // a callback function for what to do after logging out
   req.logout(function() {
-    res.redirect('/all');
+    res.redirect('/posts/all');
   })
 });
 

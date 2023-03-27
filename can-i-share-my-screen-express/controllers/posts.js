@@ -32,7 +32,7 @@ function showMy (req, res) {
 }
 
 async function showOne (req, res) {
-const post = await Post.findById(req.params.id)
+const post = await Post.findById(req.params.id).populate('comments')
 console.log(post.cast)
 //const performers = await Pe.find({_id: {$nin: movie.cast}})
 // console.log(performers)
