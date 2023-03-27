@@ -8,12 +8,12 @@ const passport = require('passport');
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
 /* GET landing page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'CISMS' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'CISMS' });
+// });
 
-router.get('/all', function(req, res, next) {
-  res.render('posts/index', { title : 'CISMS'})
+router.get('/', function(req, res, next) {
+  res.redirect('/posts/all')
 })
 
 
