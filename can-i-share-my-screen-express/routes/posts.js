@@ -7,6 +7,8 @@ const postsCtrl = require('../controllers/posts')
 router.get('/all', postsCtrl.showAll);
 router.get('/new', postsCtrl.newPost);
 router.post('/all', postsCtrl.createPost);
+router.get('/:id/edit', postsCtrl.editPost);
+router.put('/:id', postsCtrl.updatePost);
 router.get('/:id', postsCtrl.showOne);
 router.delete('/:id', postsCtrl.deleteOnePost);
 

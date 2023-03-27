@@ -6,7 +6,8 @@ const Post = require('../models/post')
 
 module.exports = {
     addComment,
-    deleteOneComment
+    deleteOneComment,
+    editComment
 }
 
 async function addComment(req, res) {
@@ -39,4 +40,15 @@ async function deleteOneComment(req, res, next) {
       return next(err);
     });
   })
+}
+
+async function editComment(req, res, next) {
+  const post = await Post.findById(req.params.id).populate('comments');
+  //const performers = await Pe.find({_id: {$nin: movie.cast}})
+  // console.log(performers)
+  res.render('posts/show', { 
+    title: `${post.title}`,
+    post,
+    editCommentId: req.params.cid
+  });
 }

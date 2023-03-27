@@ -37,7 +37,8 @@ async function showOne (req, res) {
   // console.log(performers)
   res.render('posts/show', { 
     title: `${post.title}`,
-    post
+    post,
+    editCommentId: null
   });
 }
 
@@ -45,25 +46,31 @@ async function deleteOnePost(req, res) {
   try {
     const post = await Post.findById(req.params.id);
     await Post.findOneAndDelete({_id: post._id});
-    console.log(res);
-    // ***************** ASK KEN WHY ITS WORKING WITHOUT A REDIRECT
+    res.redirect('/posts/all');
   } catch(err) {
     console.error(err);
     res.redirect('/posts/all');
   }
+}
 
+async function editPost(req, res) {
+  const post = await Post.findById(req.params.id);
+  res.render('posts/edit', { title: post.title, post });
+}
 
-  Post.findById(req.params.id).then(function(post) {
-    if (!post) return res.redirect('/posts/all');
-    post.comments.remove(req.body.commentId);
-    post.save().then(function() {
-      res.redirect(`/posts/${post._id}`);
-    }).catch(function(err) {
-      // Let Express display an error
-      console.log(err);
-      return next(err);
-    });
-  })
+async function updatePost(req, res) {
+  try {
+    const post = await Post.findById(req.params.id);
+    console.log(post, post.title, post.contents);
+    post.title = req.body.title;
+    post.contents = req.body.contents;
+    await post.save();
+    console.log(post);
+    res.redirect('/posts/all');
+  } catch(err) {
+    console.log(err);
+    res.redirect('/posts/all');
+  }
 }
 
 module.exports = {
@@ -71,5 +78,7 @@ module.exports = {
   newPost,
   createPost,
   showOne,
-  deleteOnePost
+  deleteOnePost,
+  editPost,
+  updatePost
 }

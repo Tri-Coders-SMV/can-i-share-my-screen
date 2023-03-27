@@ -12,7 +12,15 @@
     <%post.comments.forEach(function(comment){ %>
     <section>
       <div>contents</div>
+      <% if (editCommentId && comment._id === editCommentId) { %>
+        <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+          <textarea name="editedComment"><%= comment.contents %></textarea>
+          <button type="submit">Edit Comment</button>
+        </form>
+      <% } else { %>
       <div> <%= comment.contents %> </div>
+      <a href="/posts/<%= post._id %>/<%= comment._id %>">Edit Comment</a>
+      <% }; %>
       <form action="/posts/<%= post._id %>/comments?_method=DELETE" method="POST">
         <input style="display: none" name="commentId" value="<%= comment._id %>">
         <button type="submit">X</button>
