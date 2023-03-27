@@ -5,5 +5,7 @@ const postsCtrl = require('../controllers/posts')
 /* GET home page. */
 // Route starts from '/posts'
 router.get('/all', postsCtrl.showAll);
+router.get('/new', postsCtrl.newPost);
+router.post('/all', postsCtrl.createPost);
 
 module.exports = router;

@@ -10,8 +10,18 @@ async function showAll (req, res) {
 }
 
 function newPost (req, res) {
-  const posts = Post.find({});
-  res.render('posts/new', { title: 'New Post', posts });
+  res.render('posts/new', { title: 'New Post'});
+}
+
+async function createPost (req, res) {
+  try {
+    const post = await Post.create(req.body);
+    //redirect to the created post
+    res.redirect('/posts/all');
+  } catch (err) {
+    console.log(err);
+    res.render('posts/new', { errorMsg: err.message });
+  }
 }
 
 function showMy (req, res) {
@@ -22,5 +32,6 @@ function showMy (req, res) {
 
 module.exports = {
   showAll,
-  newPost
+  newPost,
+  createPost
 }
