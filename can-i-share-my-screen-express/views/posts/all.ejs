@@ -1,0 +1,6 @@
+<%- include('../partials/header'); %>
+<%posts.forEach(function(post){%>
+  <article><%= post %></article>
+  <a href="/posts/<%=post._id%>">View post </a>
+<%});%>
+<%- include('../partials/footer'); %>

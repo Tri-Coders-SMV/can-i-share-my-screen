@@ -1,0 +1,26 @@
+<%- include('../partials/header'); %>
+
+    <article>
+    <div>Title: </div>
+    <div>
+      <%= post.title %>
+    </div>
+    <div> contents: </div>
+    <div>
+      <%= post.contents %>
+    </div>
+    <%post.comments.forEach(function(comment){ %>
+    <section>
+        <div>contents</div>
+       <div> <%= comment.contents %> </div>
+    </section>
+    <% }); %>
+    <form method="POST" action="/posts/<%= post._id %>/comments">
+        <div>add comment</div>
+        <textarea name="contents">
+        </textarea>
+        <button type="submit"> Add comment</button>
+    </form>
+
+    </article>
+<%- include('../partials/footer'); %>
