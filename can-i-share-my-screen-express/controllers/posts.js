@@ -1,6 +1,7 @@
 // req.body.user = req.user._id;
 //     req.body.userName = req.user.name;
 //     req.body.userAvatar = req.user.avatar;
+const post = require('../models/post');
 const Post = require('../models/post');
 
 async function showAll (req, res) {
@@ -30,8 +31,21 @@ function showMy (req, res) {
   res.render('posts/my', { title: 'My Posts', posts });
 }
 
+async function showOne (req, res) {
+const post = await Post.findById(req.params.id)
+console.log(post.cast)
+//const performers = await Pe.find({_id: {$nin: movie.cast}})
+// console.log(performers)
+res.render('posts/show', { 
+  title: `${post.title}`,
+  post
+});
+}
+
 module.exports = {
   showAll,
   newPost,
-  createPost
+  createPost,
+  showOne
+
 }
