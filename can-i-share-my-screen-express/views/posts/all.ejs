@@ -2,5 +2,8 @@
 <%posts.forEach(function(post){%>
   <article><%= post %></article>
   <a href="/posts/<%=post._id%>">View post </a>
+  <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+    <button type="submit">X</button>
+  </form>
 <%});%>
 <%- include('../partials/footer'); %>
