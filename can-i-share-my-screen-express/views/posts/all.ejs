@@ -3,10 +3,10 @@
   <article><%= post %></article>
   <a href="/posts/<%=post._id%>">View post </a>
   <% console.log(post.user, currentUser) %>
-  <% if(post.user.toString() === currentUser.toString() ) { %>
+  <% if(currentUser && post.user.toString() === currentUser.toString() ) { %>
   <a href="/posts/<%=post._id%>/edit">Edit Post</a>
   <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-    <button type="submit">X</button>
+    <button type="submit">Delete Post</button>
   </form>
   <% }; %>
   <% if ( currentUser){ %>

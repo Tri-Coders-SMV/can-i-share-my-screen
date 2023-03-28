@@ -9,6 +9,12 @@
     <div>
       <%= post.contents %>
     </div>
+    <% if(currentUser && post.user.toString() === currentUser.toString() ) { %>
+      <a href="/posts/<%=post._id%>/edit">Edit Post</a>
+      <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete Post</button>
+      </form>
+      <% }; %>
     <% if(currentUser){ %> 
     <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
     <% }; %>
@@ -36,11 +42,12 @@
     </form>
      </section>
     <% }); %>
+    <% if ( currentUser){ %>
     <form method="POST" action="/posts/<%= post._id %>/comments/">
         <div>add comment</div>
         <textarea name="contents"></textarea>
         <button type="submit"> Add comment</button>
     </form>
-
+    <% }; %>
     </article>
 <%- include('../partials/footer'); %>
