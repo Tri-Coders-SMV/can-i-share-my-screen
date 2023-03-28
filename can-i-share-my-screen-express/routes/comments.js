@@ -8,8 +8,11 @@ const router = express.Router();
 
 const commentsCtrl = require('../controllers/comments')
 
-//router.post('/movies/:id/reviews', postsCtrl.create)
+// Every url below starts with /posts
 router.post('/:id/comments', commentsCtrl.addComment);
+router.get('/:id/:cid', commentsCtrl.editComment);
+router.put('/:id/:cid', commentsCtrl.updateComment);
+router.delete('/:id/comments', commentsCtrl.deleteOneComment);
 
 
 module.exports = router;
