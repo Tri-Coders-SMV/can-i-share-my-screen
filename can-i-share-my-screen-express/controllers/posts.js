@@ -5,13 +5,15 @@ const post = require('../models/post');
 const Post = require('../models/post');
 
 async function showAll (req, res) {
+  const currentUser = req.user ? req.user._id : null;
   const posts = await Post.find({});
   // await console.log(`HERE ARE OUR POSTS ${posts}`);
-  res.render('posts/all', { title: 'All Posts', posts });
+  res.render('posts/all', { title: 'All Posts', posts, currentUser });
 }
 
 function newPost (req, res) {
-  res.render('posts/new', { title: 'New Post'});
+  const currentUser = req.user ? req.user._id : null;
+  res.render('posts/new', { title: 'New Post', currentUser });
 }
 
 async function createPost (req, res) {
@@ -27,19 +29,21 @@ async function createPost (req, res) {
 }
 
 function showMy (req, res) {
-
+  const currentUser = req.user ? req.user._id : null;
   const posts = Post.find({});
-  res.render('posts/my', { title: 'My Posts', posts });
+  res.render('posts/my', { title: 'My Posts', posts, currentUser });
 }
 
 async function showOne (req, res) {
+  const currentUser = req.user ? req.user._id : null;
   const post = await Post.findById(req.params.id).populate('comments')
   //const performers = await Pe.find({_id: {$nin: movie.cast}})
   // console.log(performers)
   res.render('posts/show', { 
     title: `${post.title}`,
     post,
-    editCommentId: null
+    editCommentId: null,
+    currentUser
   });
 }
 
@@ -55,8 +59,9 @@ async function deleteOnePost(req, res) {
 }
 
 async function editPost(req, res) {
+  const currentUser = req.user ? req.user._id : null;
   const post = await Post.findById(req.params.id);
-  res.render('posts/edit', { title: post.title, post });
+  res.render('posts/edit', { title: post.title, post, currentUser });
 }
 
 async function updatePost(req, res) {

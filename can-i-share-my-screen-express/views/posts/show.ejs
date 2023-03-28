@@ -9,7 +9,9 @@
     <div>
       <%= post.contents %>
     </div>
+    <% if(currentUser){ %> 
     <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
+    <% }; %>
     <h3><%= post.likes.length || 0; %></h3>
     <%post.comments.forEach(function(comment){ %>
     <section>
@@ -27,9 +29,11 @@
         <input style="display: none" name="commentId" value="<%= comment._id %>">
         <button type="submit">X</button>
       </form>
+      <% if(currentUser){ %> 
       <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like">like</button></form>
+      <% }; %>
       <h3><%= comment.likes.length || 0; %></h3>
-      </form>
+    </form>
      </section>
     <% }); %>
     <form method="POST" action="/posts/<%= post._id %>/comments/">

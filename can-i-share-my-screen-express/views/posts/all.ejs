@@ -2,12 +2,16 @@
 <%posts.forEach(function(post){%>
   <article><%= post %></article>
   <a href="/posts/<%=post._id%>">View post </a>
+  <% console.log(post.user, currentUser) %>
+  <% if(post.user.toString() === currentUser.toString() ) { %>
   <a href="/posts/<%=post._id%>/edit">Edit Post</a>
   <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
     <button type="submit">X</button>
   </form>
+  <% }; %>
+  <% if ( currentUser){ %>
   <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
+  <% }; %>
   <h3><%= post.likes.length || 0; %></h3>
 <%});%>
-<% console.log(req.session.user) %>
 <%- include('../partials/footer'); %>
