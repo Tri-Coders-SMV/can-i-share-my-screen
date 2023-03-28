@@ -61,11 +61,9 @@ async function editPost(req, res) {
 async function updatePost(req, res) {
   try {
     const post = await Post.findById(req.params.id);
-    console.log(post, post.title, post.contents);
     post.title = req.body.title;
     post.contents = req.body.contents;
     await post.save();
-    console.log(post);
     res.redirect('/posts/all');
   } catch(err) {
     console.log(err);

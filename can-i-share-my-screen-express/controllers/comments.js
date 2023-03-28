@@ -7,7 +7,8 @@ const Post = require('../models/post')
 module.exports = {
     addComment,
     deleteOneComment,
-    editComment
+    editComment,
+    updateComment
 }
 
 async function addComment(req, res) {
@@ -29,9 +30,7 @@ async function addComment(req, res) {
 async function deleteOneComment(req, res, next) {
   Post.findById(req.params.id).then(function(post) {
     if (!post) return res.redirect('/posts/all');
-    console.log(req.body, post.comments);
     post.comments.remove(req.body.commentId);
-    console.log(post.comments);
     post.save().then(function() {
       res.redirect(`/posts/${post._id}`);
     }).catch(function(err) {
@@ -51,4 +50,16 @@ async function editComment(req, res, next) {
     post,
     editCommentId: req.params.cid
   });
+}
+
+async function updateComment(req, res) {
+  try {
+    const comment = await Comment.findById(req.params.cid);
+    comment.contents = req.body.editedComment;
+    await comment.save();
+    res.redirect(`/posts/${req.params.id}`);
+  } catch(err) {
+    console.log(err);
+    res.redirect(`/posts/${req.params.id}`);
+  }
 }

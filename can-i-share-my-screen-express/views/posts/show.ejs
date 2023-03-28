@@ -12,8 +12,8 @@
     <%post.comments.forEach(function(comment){ %>
     <section>
       <div>contents</div>
-      <% if (editCommentId && comment._id === editCommentId) { %>
-        <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+      <% if (editCommentId && comment._id.toString() === editCommentId) { %>
+        <form action="/posts/<%= post._id%>/<%=comment._id.toString() %>?_method=PUT" method="POST">
           <textarea name="editedComment"><%= comment.contents %></textarea>
           <button type="submit">Edit Comment</button>
         </form>
