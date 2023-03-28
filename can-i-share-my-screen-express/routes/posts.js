@@ -15,4 +15,5 @@ router.delete('/:id', postsCtrl.deleteOnePost);
 router.post('/all/:id/likes', postsCtrl.addLike)
 
 
+
 module.exports = router;

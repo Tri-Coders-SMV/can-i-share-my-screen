@@ -16,7 +16,7 @@ function newPost (req, res) {
 
 async function createPost (req, res) {
   try {
-    req.body.user = req.user._id 
+    req.body.user = req.user._id
     const post = await Post.create(req.body);
     //redirect to the created post
     res.redirect('/posts/all');

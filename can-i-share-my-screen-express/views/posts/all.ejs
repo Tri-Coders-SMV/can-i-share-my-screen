@@ -9,4 +9,5 @@
   <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
   <h3><%= post.likes.length || 0; %></h3>
 <%});%>
+<% console.log(req.session.user) %>
 <%- include('../partials/footer'); %>
