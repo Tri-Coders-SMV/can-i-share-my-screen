@@ -16,6 +16,7 @@ function newPost (req, res) {
 
 async function createPost (req, res) {
   try {
+    req.body.user = req.user._id 
     const post = await Post.create(req.body);
     //redirect to the created post
     res.redirect('/posts/all');
@@ -71,6 +72,25 @@ async function updatePost(req, res) {
   }
 }
 
+async function addLike(req, res) {
+ console.log(req.user)
+ const userId = req.user._id;
+ const post = await Post.findById(req.params.id);
+ if (post.likes.includes(req.user._id)){
+ const index =  post.likes.indexOf(req.user._id)
+post.likes.splice(index, 1)
+ } else {
+  post.likes.push(req.user._id);
+ }
+ await post.save();
+ console.log(req.url)
+ const url = req.url.toString()
+console.log(url);
+ if (url.includes('all')) {
+  res.redirect('/posts/all')
+ } else {res.redirect(`/posts/${req.params.id}`)
+}};
+
 module.exports = {
   showAll,
   newPost,
@@ -78,5 +98,6 @@ module.exports = {
   showOne,
   deleteOnePost,
   editPost,
-  updatePost
+  updatePost,
+  addLike
 }

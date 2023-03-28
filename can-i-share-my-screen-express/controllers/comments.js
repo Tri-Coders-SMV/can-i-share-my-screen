@@ -8,11 +8,13 @@ module.exports = {
     addComment,
     deleteOneComment,
     editComment,
-    updateComment
+    updateComment,
+    addLike
 }
 
 async function addComment(req, res) {
     try {
+      req.body.user = req.user._id
       const post = await Post.findById(req.params.id);
       // we push an object with the data for the 
       // review sub-doc into Mongoose arrays
@@ -63,3 +65,16 @@ async function updateComment(req, res) {
     res.redirect(`/posts/${req.params.id}`);
   }
 }
+
+
+async function addLike(req, res) {
+    const comment = await Comment.findById(req.params.cid);
+    if (comment.likes.includes(req.user._id)){
+    const index =  comment.likes.indexOf(req.user._id)
+   comment.likes.splice(index, 1)
+    } else {
+     comment.likes.push(req.user._id);
+    }
+    await comment.save();
+   res.redirect(`/posts/${req.params.id}`)
+   };

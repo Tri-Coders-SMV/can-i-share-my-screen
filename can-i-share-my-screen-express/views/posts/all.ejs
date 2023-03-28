@@ -6,5 +6,7 @@
   <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
     <button type="submit">X</button>
   </form>
+  <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
+  <h3><%= post.likes.length || 0; %></h3>
 <%});%>
 <%- include('../partials/footer'); %>
