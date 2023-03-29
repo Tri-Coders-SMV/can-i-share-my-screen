@@ -18,7 +18,8 @@
           <h2 <%-- (typeof title != "undefined" ? title : "CISMS") === 'Username' ? 'class="active"' : '' %>><%= user.name %></h2>
           <a href="/posts/new"	<%- (typeof title != "undefined" ? title : "CISMS") === 'Add Post' ? 'class="active"' : '' %>>
               ADD POST</a>
-          <a href="/logout">LOG OUT</a>
+          <a href="/posts/my">MY POSTS</a>
+          <a href="/logout">LOG OUT</a> <br><br>
         <% } else { %>
           <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
         <% } %>

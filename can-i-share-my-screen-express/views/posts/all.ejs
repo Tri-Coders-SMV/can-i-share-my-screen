@@ -16,6 +16,6 @@
   <% if ( currentUserId){ %>
   <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
   <% }; %>
-  <h3><%= post.likes.length || 0; %></h3>
+  <h3>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </h3>
 <%});%>
 <%- include('../partials/footer'); %>
