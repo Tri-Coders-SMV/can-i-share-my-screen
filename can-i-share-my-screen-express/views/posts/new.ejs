@@ -1,7 +1,30 @@
 <%- include('../partials/header'); %>
+<div class="container-fluid w-100 justify-content-center">
+<div class="container justify-content-center">
 <form action="/posts/all" method="POST">
-  <label>Title <input type="text" name="title"></label><br><br>
-  <label>const myProblem = { ....<textarea name="contents"></textarea></label><br><br>
+  <div class="row">
+  <div class="col-4">
+  <h2>
+    addPost
+  </h2>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-4">
+  <input type="text" name="title" placeholder="title">
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-4">
+  <textarea name="contents" placeholder="const myProblem = { ..."></textarea>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-4">
   <button type="submit">CREATE POST</button>
+  </div>
+  </div>
 </form>
+</div>
+</div>
 <%- include('../partials/footer'); %>
