@@ -24,7 +24,7 @@
     <% }; %>
     <h3><%= post.likes.length || 0; %></h3>
     <%post.comments.forEach(function(comment){ %>
-    <section>
+    <section>`
       <div>contents</div>
       <%const userFromComment = usersFromComments[post.user.toString()];%>
         <label><%=userFromComment.name%></label>
