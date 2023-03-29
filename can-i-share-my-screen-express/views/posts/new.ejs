@@ -1,26 +1,26 @@
 <%- include('../partials/header'); %>
-<div class="container">
+<div class="container mt-4">
   <form action="/posts/all" method="POST"></form>
     <div class="row">
       
       <!-- <div class="col-lg-2"></div> -->
-      <div class="col-md-6 mx-auto" style="background-color: black; color: white;">
+      <div class="col-md-8 mx-auto post">
         
         <h2 style="text-align: center;">addPost</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 mx-auto justify-content-center">
+      <div class="col-md-8 mx-auto justify-content-center post">
         <input type="text" name="title" placeholder="title"/>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 mx-auto">
+      <div class="col-md-8 mx-auto post">
         <textarea name="contents" placeholder="const myProblem = { ..." style="width: 100%;"></textarea>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 mx-auto">
+      <div class="col-md-8 mx-auto post">
         <button type="submit">CREATE POST</button>
       </div>
     </div>

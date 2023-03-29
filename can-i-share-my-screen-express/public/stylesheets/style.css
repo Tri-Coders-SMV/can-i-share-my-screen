@@ -3,7 +3,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: black;
   color: rgb(235, 70, 215);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 a {
@@ -21,4 +21,25 @@ a {
 
 .login img {
   height: 30px;
+}
+
+button {
+  background-color: blueviolet;
+}
+
+button.like {
+  background: url(https://flyclipart.com/thumb2/purple-facebook-like-icon-744456.png);
+}
+
+article {
+  color: rgb(218, 134, 213);
+  /* color: rgb(162, 98, 222); */
+}
+
+.post {
+  background-color: lavender;
+}
+
+textarea {
+  height: 150px;
 }

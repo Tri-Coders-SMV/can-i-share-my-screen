@@ -1,5 +1,4 @@
 <%- include('../partials/header'); %>
-
 <%posts.forEach(function(post){%>
   <label><%=currentUser.name%></label>
   <img src="<%=currentUser.avatar%>" alt="" style="height:50px">
@@ -10,7 +9,10 @@
   <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
     <button type="submit">Delete Post</button>
   </form>
-  <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
-  <h3>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </h3>
+  <form action="/posts/all/<%=post._id%>/likes" method="POST">
+    <button type="submit" class="like" name="like">
+      <img src="https://tse4.mm.bing.net/th?id=OIP.Dhn2wwuix7X9iuz5BbSeOgAAAA&pid=Api" alt="" style="height: 25px">
+    </button></form>
+  <label>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </label><br><br>
 <%});%>
 <%- include('../partials/footer'); %>
