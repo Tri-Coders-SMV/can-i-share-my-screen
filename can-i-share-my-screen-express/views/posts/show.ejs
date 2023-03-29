@@ -9,13 +9,13 @@
     <div>
       <%= post.contents %>
     </div>
-    <% if(currentUser && post.user.toString() === currentUser.toString() ) { %>
+    <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
       <a href="/posts/<%=post._id%>/edit">Edit Post</a>
       <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete Post</button>
       </form>
       <% }; %>
-    <% if(currentUser){ %> 
+    <% if(currentUserId){ %> 
     <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
     <% }; %>
     <h3><%= post.likes.length || 0; %></h3>
@@ -35,14 +35,14 @@
         <input style="display: none" name="commentId" value="<%= comment._id %>">
         <button type="submit">X</button>
       </form>
-      <% if(currentUser){ %> 
+      <% if(currentUserId){ %> 
       <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like">like</button></form>
       <% }; %>
       <h3><%= comment.likes.length || 0; %></h3>
     </form>
      </section>
     <% }); %>
-    <% if ( currentUser){ %>
+    <% if ( currentUserId){ %>
     <form method="POST" action="/posts/<%= post._id %>/comments/">
         <div>add comment</div>
         <textarea name="contents"></textarea>

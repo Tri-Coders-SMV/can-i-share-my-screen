@@ -12,7 +12,7 @@ router.get('/:id/edit', postsCtrl.editPost);
 router.put('/:id', postsCtrl.updatePost);
 router.get('/:id', postsCtrl.showOne);
 router.delete('/:id', postsCtrl.deleteOnePost);
-router.post('/all/:id/likes', postsCtrl.addLike)
+router.post('/all/:id/likes', postsCtrl.addLike);
 
 
 

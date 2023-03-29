@@ -44,7 +44,7 @@ async function deleteOneComment(req, res, next) {
 }
 
 async function editComment(req, res, next) {
-  const currentUser = req.user ? req.user._id : null;
+  const currentUserId = req.user ? req.user._id : null;
   const post = await Post.findById(req.params.id).populate('comments');
   //const performers = await Pe.find({_id: {$nin: movie.cast}})
   // console.log(performers)
@@ -52,7 +52,7 @@ async function editComment(req, res, next) {
     title: `${post.title}`,
     post,
     editCommentId: req.params.cid,
-    currentUser
+    currentUserId
 
   });
 }
