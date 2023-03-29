@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,21 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <title><%= title%></title>
+    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <nav>
-        <!-- <img src="**** add our logo img source here"> *** -->
-        <a href="/posts/all" <%- title === 'All Posts' ? 'class="active"' : '' %>>ALL POSTS</a>
-        <% if (user) { %>
-          <!-- <img src="" user avatar -->
-          <h2 <%-- title === 'Username' ? 'class="active"' : '' %>><%= user.name %></h2>
-          <a href="/posts/new"	<%- title === 'Add Post' ? 'class="active"' : '' %>>
-              ADD POST</a>
-          <a href="/posts/my">MY POSTS</a>
-          <a href="/logout">LOG OUT</a> <br><br>
-        <% } else { %>
-          <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        <% } %>
-      </nav>
+
+<!-- https://startbootstrap.com/snippets/navbar-logo -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="/posts/all">
+          <img src="https://i.imgur.com/JqEj7pe.png" alt="CISMS" height="60">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/posts/all">All Posts</a>
+            </li>
+            <% if (user) { %>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/posts/my-posts">My Posts</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/new">New Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/auth/google" class="login">Login with Google</a>
+              </li>
+            <% }; %>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/posts/all" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
