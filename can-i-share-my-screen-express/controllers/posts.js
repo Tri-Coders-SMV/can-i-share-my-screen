@@ -19,13 +19,17 @@ async function showAll(req, res) {
     title: 'All Posts',
     posts,
     currentUserId,
-    usersFromPosts,
+    usersFromPosts
   });
 }
 
 function newPost (req, res) {
   const currentUserId = req.user ? req.user._id : null;
-  res.render('posts/new', { title: 'New Post', currentUserId });
+  if(!currentUserId) {
+    res.redirect('/posts/all');
+  } else {
+    res.render('posts/new', { title: 'New Post', currentUserId });
+  }
 }
 
 async function createPost (req, res) {
@@ -33,7 +37,6 @@ async function createPost (req, res) {
     req.body.user = req.user._id
     const post = await Post.create(req.body);
     //redirect to the created post
-    console.log("HERE");
     res.redirect('/posts/all');
   } catch (err) {
     console.log(err);
@@ -41,10 +44,17 @@ async function createPost (req, res) {
   }
 }
 
-function showMy (req, res) {
+async function showMy (req, res) {
   const currentUserId = req.user ? req.user._id : null;
-  const posts = Post.find({});
-  res.render('posts/my', { title: 'My Posts', posts, currentUserId });
+  const posts = await Post.find({user: currentUserId});
+  const currentUser = req.user ? req.user: null;
+
+  res.render('posts/my', { 
+    title: 'My Posts', 
+    posts, 
+    currentUserId,
+    currentUser 
+  });
 }
 
 async function showOne (req, res) {
@@ -129,5 +139,6 @@ module.exports = {
   deleteOnePost,
   editPost,
   updatePost,
-  addLike
+  addLike,
+  showMy
 }

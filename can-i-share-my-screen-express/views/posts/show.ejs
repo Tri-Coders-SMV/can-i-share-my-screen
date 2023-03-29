@@ -22,7 +22,7 @@
     <% if(currentUserId){ %> 
     <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
     <% }; %>
-    <h3><%= post.likes.length || 0; %></h3>
+    <h3>Likes:<%= post.likes.length || 0; %></h3>
     <%post.comments.forEach(function(comment){ %>
     <section>`
       <div>contents</div>
@@ -46,7 +46,7 @@
       <% if(currentUserId){ %> 
       <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like">like</button></form>
       <% }; %>
-      <h3><%= comment.likes.length || 0; %></h3>
+      <h3>Likes:<%= comment.likes.length || 0; %></h3>
     </form>
      </section>
     <% }); %>
