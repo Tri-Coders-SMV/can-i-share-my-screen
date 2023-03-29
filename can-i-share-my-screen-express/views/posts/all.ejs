@@ -2,9 +2,8 @@
 
 <%posts.forEach(function(post){%>
   <%const user = usersFromPosts[post.user.toString()]%>
-  <%console.log(user)%>
   <label><%=user.name%></label>
-  <img src="<%=user.avatar%>" alt="" style="height:200px">
+  <img src="<%=user.avatar%>" alt="" style="height:50px">
   <label><%=post.createdAt.toLocaleString()%></label>
   <article><%= post %></article>
   <a href="/posts/<%=post._id%>">View post </a>

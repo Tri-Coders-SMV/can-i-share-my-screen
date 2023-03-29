@@ -13,7 +13,6 @@ async function showAll(req, res) {
     const post = posts[i];
     const user = await User.findById(post.user);
     usersFromPosts[user._id.toString()] = user;
-    console.log(user._id.toString());
   }
 
   res.render('posts/all', {
@@ -52,13 +51,15 @@ async function showOne (req, res) {
   const currentUser = req.user;
   const currentUserId = req.user ? req.user._id : null;
   const post = await Post.findById(req.params.id).populate('comments');
+  const postUser = await User.findById(post.user);
   const comments = post.comments;
   const usersFromComments = {}
-
-  comments.forEach(async function(comment){
+  
+  for (let i = 0; i < comments.length; i++) {
+    const comment = comments[i];
     const user = await User.findById(comment.user);
     usersFromComments[user._id.toString()] = user;
-  });
+  }
 
   res.render('posts/show', { 
     title: `${post.title}`,
@@ -66,7 +67,8 @@ async function showOne (req, res) {
     editCommentId: null,
     currentUser,
     currentUserId,
-    usersFromComments
+    usersFromComments,
+    postUser
   });
 }
 

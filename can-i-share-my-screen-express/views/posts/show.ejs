@@ -1,6 +1,10 @@
 <%- include('../partials/header'); %>
     <input type="button" value="Back" onclick="history.back()"><br><br>
     <article>
+      <%console.log(post.likes)%>
+    <label><%=postUser.name%></label>
+    <img src="<%=postUser.avatar%>" alt="" style="height:50px">
+    <label><%=post.createdAt.toLocaleString()%></label>
     <div>Title: </div>
     <div>
       <%= post.title %>
@@ -22,6 +26,10 @@
     <%post.comments.forEach(function(comment){ %>
     <section>
       <div>contents</div>
+      <%const userFromComment = usersFromComments[post.user.toString()];%>
+        <label><%=userFromComment.name%></label>
+        <img src="<%=userFromComment.avatar%>" alt="" style="height:50px">
+        <label><%=post.createdAt.toLocaleString()%></label>
       <% if (editCommentId && comment._id.toString() === editCommentId) { %>
         <form action="/posts/<%= post._id%>/<%=comment._id.toString() %>?_method=PUT" method="POST">
           <textarea name="editedComment"><%= comment.contents %></textarea>
