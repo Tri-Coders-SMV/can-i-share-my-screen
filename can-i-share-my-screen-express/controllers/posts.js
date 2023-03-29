@@ -25,7 +25,11 @@ async function showAll(req, res) {
 
 function newPost (req, res) {
   const currentUserId = req.user ? req.user._id : null;
-  res.render('posts/new', { title: 'New Post', currentUserId });
+  if(!currentUserId) {
+    res.redirect('/posts/all');
+  } else {
+    res.render('posts/new', { title: 'New Post', currentUserId });
+  }
 }
 
 async function createPost (req, res) {

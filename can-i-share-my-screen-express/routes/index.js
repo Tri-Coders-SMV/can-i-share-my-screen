@@ -13,9 +13,12 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 // });
 
 router.get('/', function(req, res, next) {
-  res.redirect('/posts/all')
+  res.redirect('/posts/all');
 })
 
+router.get('/posts', function(req, res, next) {
+  res.redirect('/posts/all');
+})
 
 // Google OAuth login
 router.get('/auth/google', passport.authenticate(
