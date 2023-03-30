@@ -121,9 +121,9 @@
       </div>
       <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like"><%= comment.likes.length ? `${comment.likes.length} likes` : 'like' %></button></form>
     </form>
-     </section>
-    <% }); %>
     </div>
+    <% }); %>
+  
 
     <!-- END EXISTING COMMENTS -->
 
