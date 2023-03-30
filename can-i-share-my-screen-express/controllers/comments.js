@@ -31,21 +31,34 @@ async function addComment(req, res) {
 }
 
 async function deleteOneComment(req, res, next) {
-  Post.findById(req.params.id).then(function (post) {
-    if (!post) return res.redirect("/posts/all");
-    post.comments.remove(req.body.commentId);
-    post
-      .save()
-      .then(function () {
-        res.redirect(`/posts/${post._id}`);
-      })
-      .catch(function (err) {
-        // Let Express display an error
-        console.log(err);
-        return next(err);
-      });
-  });
+  try {
+    if (!req.user) {
+      res.redirect(`posts/${req.params.id}`);
+    } else {
+      comment = await Comment.findById(req.params.cid);
+      console.log(comment.user.toString(), req.user._id.toString());
+      if (!comment.user.toString() === req.user._id.toString) {
+        res.redirect(`posts/${req.params.id}`);
+      } else {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+          return res.redirect("/posts/all")
+        } else {
+          console.log('cid', req.params.cid);
+          await post.comments.remove(req.params.cid);
+          await Comment.deleteOne(comment);
+          await post.save();
+          res.redirect(`/posts/${post._id}`);
+        }
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    res.redirect('');
+    return next(err);
+  }
 }
+
 
 async function editComment(req, res, next) {
   const currentUserId = req.user ? req.user._id : null;
