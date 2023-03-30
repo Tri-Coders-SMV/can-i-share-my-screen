@@ -1,7 +1,6 @@
 <%- include('../partials/header'); %>
     <input type="button" value="Back" onclick="history.back()"><br><br>
     <article>
-      <%console.log(post.likes)%>
     <label><%=postUser.name%></label>
     <img src="<%=postUser.avatar%>" alt="" style="height:50px">
     <label><%=post.createdAt.toLocaleString()%></label>
@@ -23,6 +22,7 @@
     <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
     <% }; %>
     <h3>Likes:<%= post.likes.length || 0; %></h3>
+    
     <%post.comments.forEach(function(comment){ %>
     <section>`
       <div>contents</div>

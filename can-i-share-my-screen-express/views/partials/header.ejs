@@ -8,7 +8,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-
     <nav>
         <!-- <img src="**** add our logo img source here"> *** -->
         <a href="/posts/all" <%- title === 'All Posts' ? 'class="active"' : '' %>>ALL POSTS</a>
@@ -17,7 +16,8 @@
           <h2 <%-- title === 'Username' ? 'class="active"' : '' %>><%= user.name %></h2>
           <a href="/posts/new"	<%- title === 'Add Post' ? 'class="active"' : '' %>>
               ADD POST</a>
-          <a href="/logout">LOG OUT</a>
+          <a href="/posts/my">MY POSTS</a>
+          <a href="/logout">LOG OUT</a> <br><br>
         <% } else { %>
           <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
         <% } %>
