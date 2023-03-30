@@ -63,7 +63,7 @@ async function showOne (req, res) {
   const post = await Post.findById(req.params.id).populate('comments');
   const postUser = await User.findById(post.user);
   const comments = post.comments;
-  const usersFromComments = {}
+  const usersFromComments = {};
   
   for (let i = 0; i < comments.length; i++) {
     const comment = comments[i];

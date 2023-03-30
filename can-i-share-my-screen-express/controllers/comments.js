@@ -3,13 +3,14 @@
 //     req.body.userAvatar = req.user.avatar;
 const Comment = require("../models/comment");
 const Post = require("../models/post");
+const User = require("../models/user");
 
 module.exports = {
   addComment,
   deleteOneComment,
   editComment,
   updateComment,
-  addLike,
+  addLike
 };
 
 async function addComment(req, res) {
@@ -49,13 +50,23 @@ async function deleteOneComment(req, res, next) {
 async function editComment(req, res, next) {
   const currentUserId = req.user ? req.user._id : null;
   const post = await Post.findById(req.params.id).populate("comments");
-  //const performers = await Pe.find({_id: {$nin: movie.cast}})
-  // console.log(performers)
+  const postUser = await User.findById(post.user);
+  const comments = post.comments;
+  const usersFromComments = {};
+  
+  for (let i = 0; i < comments.length; i++) {
+    const comment = comments[i];
+    const user = await User.findById(comment.user);
+    usersFromComments[user._id.toString()] = user;
+  }
+
   res.render("posts/show", {
     title: `${post.title}`,
     post,
     editCommentId: req.params.cid,
     currentUserId,
+    postUser,
+    usersFromComments
   });
 }
 

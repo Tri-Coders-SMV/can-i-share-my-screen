@@ -49,9 +49,9 @@
       
     <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
 
-    <div flex-row>
-      <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
-    </div>
+
+    <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
+
 
   </div>
   </div>
