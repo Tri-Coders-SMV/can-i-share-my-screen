@@ -64,6 +64,7 @@ textarea {
 .post-contents {
   padding: 10px 10px 0 10px;
   word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .dropdown-toggle {
@@ -77,4 +78,5 @@ textarea {
 .comment-text-area {
   width: 55vw;
   height: 30vh;
+  white-space: pre-wrap;
 }
