@@ -1,19 +1,56 @@
 <%- include('../partials/header'); %>
+
 <%posts.forEach(function(post){%>
-  
-  <label><%=currentUser.name%></label>
-  <img src="<%=currentUser.avatar%>" alt="" style="height:50px">
-  <label><%=post.createdAt.toLocaleString()%></label>
-  <article><%= post %></article>
-  <a href="/posts/<%=post._id%>">View post </a>
-  <a href="/posts/<%=post._id%>/edit">Edit Post</a>
-  <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete Post</button>
-  </form>
-  <form action="/posts/all/<%=post._id%>/likes" method="POST">
-    <button type="submit" class="like" name="like">
-      <img src="https://tse4.mm.bing.net/th?id=OIP.Dhn2wwuix7X9iuz5BbSeOgAAAA&pid=Api" alt="" style="height: 25px">
-    </button></form>
-  <label>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </label><br><br>
-<%});%>
+  <div class="post postContainer border-4 container mt-4 pt-2 pb-2">
+    <div class="flex-row d-flex justify-content-between">
+    <div class="d-inline-block">
+      <img src="<%= currentUser.avatar ? currentUser.avatar : 'https://i.imgur.com/JqEj7pe.png' %>" class="post rounded-circle" alt="" style="height:50px">
+    </div>
+
+    <div class="d-inline-block">
+      <label><%= currentUser.name %></label>
+    </div>
+
+      <div class="d-inline-block d-flex">
+        <label><%= post.createdAt.toLocaleString() %></label>
+      </div>
+
+      <div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    ...
+                </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="/posts/<%= post._id %>/edit">Edit</a></li>
+            <form class="dropdown-item" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+              <button type="submit">Delete Post</button>
+            </form>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+      <div class="mt-2">
+        <a href="/posts/<%= post._id %>">
+          <h3><%=post.title%></h3>
+        </a>
+      </div>
+
+
+
+    <div class="row m-2 post">
+        <p class="post-contents"><%= post.contents %></p>
+    </div>
+
+    <div class="d-flex flex-row justify-content-between">
+      
+    <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
+
+    <div flex-row>
+      <form action="/posts/my/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
+    </div>
+
+  </div>
+  </div>
+  <%});%>
 <%- include('../partials/footer'); %>

@@ -48,4 +48,28 @@ textarea {
   height: 150px;
 }
 
+.postContainer {
+  border: 2px;
+  border-style: solid;
+  border-color: rgb(252, 57, 243);
+  border-radius: 20px;
+  margin: 0 auto;
+  width: 60vw;
+}
 
+.input-field {
+  background-color: rgb(240, 240, 248);
+}
+
+.post-contents {
+  padding: 10px 10px 0 10px;
+  word-wrap: break-word;
+}
+
+.dropdown-toggle {
+  background-color: blueviolet;
+}
+
+.dropdown-toggle:hover {
+  background-color: rgb(159, 88, 225);
+}

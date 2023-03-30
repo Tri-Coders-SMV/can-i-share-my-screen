@@ -114,24 +114,27 @@ async function updatePost(req, res) {
 
 async function addLike(req, res) {
   if(!req.user){
-  res.redirect('/auth/google');
+    res.redirect('/auth/google');
   } else {
-  console.log(req.user);
-  const userId = req.user._id;
-  const post = await Post.findById(req.params.id);
-  if (post.likes.includes(req.user._id)){
-  const index =  post.likes.indexOf(req.user._id)
-  post.likes.splice(index, 1)
-  } else {
-    post.likes.push(req.user._id);
-  }
-  await post.save();
-  console.log(req.url)
-  const url = req.url.toString()
-  console.log(url);
-  if (url.includes('all')) {
-    res.redirect('/posts/all')
-  } else {res.redirect(`/posts/${req.params.id}`);
+    console.log(req.user);
+    const userId = req.user._id;
+    const post = await Post.findById(req.params.id);
+    if (post.likes.includes(req.user._id)){
+      const index =  post.likes.indexOf(req.user._id)
+      post.likes.splice(index, 1)
+    } else {
+      post.likes.push(req.user._id);
+    }
+    await post.save();
+    console.log(req.url)
+    const url = req.url.toString()
+    console.log(url);
+    if (url.includes('all')) {
+      res.redirect('/posts/all')
+    } else if (url.includes('my')) {
+      res.redirect('/posts/my')
+    } else {
+      res.redirect(`/posts/${req.params.id}`);
     }
   }
 };
