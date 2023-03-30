@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const postsCtrl = require('../controllers/posts')
+const commentsCtrl = require('../controllers/comments');
 
 /* GET home page. */
 // Route starts from '/posts'
@@ -15,6 +16,12 @@ router.get('/:id', postsCtrl.showOne);
 router.delete('/:id', postsCtrl.deleteOnePost);
 router.post('/all/:id/likes', postsCtrl.addLike);
 router.post('/my/:id/likes', postsCtrl.addLike);
+
+
+
+
+
+
 
 
 module.exports = router;
