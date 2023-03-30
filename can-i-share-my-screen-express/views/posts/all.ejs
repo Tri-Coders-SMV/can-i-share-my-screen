@@ -2,38 +2,58 @@
 
 <%posts.forEach(function(post){%>
   <%const user = usersFromPosts[post.user.toString()]%>
-  <div class="container mt-4">
-    <div class="row">
-      <label><%= user.name %></label>
+  <div class="post rounded border border-4 container mt-4 pt-2 pb-2">
+    <div class="flex-row d-flex justify-content-between">
+    <div class="post d-inline-block">
       <img src="<%=user.avatar%>" alt="" style="height:50px">
-      <label><%= post.createdAt.toLocaleString() %></label>
-      <h3><%=post.title%></h3>
-      <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</button>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#"></a>
-        </div>
-      </div>
-      <%};%>
     </div>
-    <div class="row">
+
+    <div class="post d-inline-block">
+      <label><%= user.name %></label>
+    </div>
+
+      <div class="post d-inline-block">
+        <label><%= post.createdAt.toLocaleString() %></label>
+      </div>
+
+      <div class="post">
+        <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      ...
+                  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/posts/<%= post._id %>/edit">Edit</a></li>
+              <form class="dropdown-item" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete Post</button>
+              </form>
+            </ul>
+          </div>
+          <%};%>
+      </div>
+    </div>
+
+      <div class="mt-2 post">
+        <a href="/posts/<%= post._id %>">
+          <h3><%=post.title%></h3>
+        </a>
+      </div>
+
+
+
+    <div class="row mt-2">
       <article><%= post.contents %></article>
     </div>
 
-    <a href="/posts/<%=post._id%>">View post </a>
-    <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
+    <div class="d-flex flex-row justify-content-between">
+      
+    <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
 
-    <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete Post</button>
-    </form>
-    <% }; %>
-    
-    <% if ( currentUserId){ %>
-    <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
-    <% }; %>
-    <h3>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </h3>
-  <%});%>
+    <div flex-row>
+      <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
+    </div>
+
   </div>
+  </div>
+  <%});%>
 <%- include('../partials/footer'); %>

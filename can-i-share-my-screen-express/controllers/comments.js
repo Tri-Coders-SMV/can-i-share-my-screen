@@ -72,15 +72,19 @@ async function updateComment(req, res) {
 }
 
 async function addLike(req, res) {
-  const comment = await Comment.findById(req.params.cid);
-  if (comment.likes.includes(req.user._id)) {
-    const index = comment.likes.indexOf(req.user._id);
-    comment.likes.splice(index, 1);
+  if(!req.user){
+    res.redirect('/auth/google');
   } else {
-    comment.likes.push(req.user._id);
+    const comment = await Comment.findById(req.params.cid);
+    if (comment.likes.includes(req.user._id)) {
+      const index = comment.likes.indexOf(req.user._id);
+      comment.likes.splice(index, 1);
+    } else {
+      comment.likes.push(req.user._id);
+    }
+    await comment.save();
+    res.redirect(`/posts/${req.params.id}`);
   }
-  await comment.save();
-  res.redirect(`/posts/${req.params.id}`);
 }
 
 

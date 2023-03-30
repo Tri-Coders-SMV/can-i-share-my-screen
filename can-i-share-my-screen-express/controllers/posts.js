@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 async function showAll(req, res) {
   const currentUserId = req.user ? req.user._id : null;
-  const posts = await Post.find({});
+  const posts = await Post.find({}).sort({createdAt: -1});
   const usersFromPosts = {};
 
   for (let i = 0; i < posts.length; i++) {
@@ -46,7 +46,7 @@ async function createPost (req, res) {
 
 async function showMy (req, res) {
   const currentUserId = req.user ? req.user._id : null;
-  const posts = await Post.find({user: currentUserId});
+  const posts = await Post.find({user: currentUserId}).sort({createdAt: -1});
   const currentUser = req.user ? req.user: null;
 
   res.render('posts/my', { 
@@ -113,23 +113,28 @@ async function updatePost(req, res) {
 }
 
 async function addLike(req, res) {
- console.log(req.user)
- const userId = req.user._id;
- const post = await Post.findById(req.params.id);
- if (post.likes.includes(req.user._id)){
- const index =  post.likes.indexOf(req.user._id)
-post.likes.splice(index, 1)
- } else {
-  post.likes.push(req.user._id);
- }
- await post.save();
- console.log(req.url)
- const url = req.url.toString()
-console.log(url);
- if (url.includes('all')) {
-  res.redirect('/posts/all')
- } else {res.redirect(`/posts/${req.params.id}`)
-}};
+  if(!req.user){
+  res.redirect('/auth/google');
+  } else {
+  console.log(req.user);
+  const userId = req.user._id;
+  const post = await Post.findById(req.params.id);
+  if (post.likes.includes(req.user._id)){
+  const index =  post.likes.indexOf(req.user._id)
+  post.likes.splice(index, 1)
+  } else {
+    post.likes.push(req.user._id);
+  }
+  await post.save();
+  console.log(req.url)
+  const url = req.url.toString()
+  console.log(url);
+  if (url.includes('all')) {
+    res.redirect('/posts/all')
+  } else {res.redirect(`/posts/${req.params.id}`);
+    }
+  }
+};
 
 module.exports = {
   showAll,

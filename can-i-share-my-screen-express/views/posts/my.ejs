@@ -1,5 +1,6 @@
 <%- include('../partials/header'); %>
 <%posts.forEach(function(post){%>
+  
   <label><%=currentUser.name%></label>
   <img src="<%=currentUser.avatar%>" alt="" style="height:50px">
   <label><%=post.createdAt.toLocaleString()%></label>

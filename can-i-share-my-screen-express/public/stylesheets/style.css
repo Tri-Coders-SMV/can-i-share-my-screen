@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: black;
   color: rgb(235, 70, 215);
@@ -7,7 +6,8 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: blueviolet;
+  text-decoration: none;
 }
 
 /* lesson CSS for login */
@@ -33,13 +33,19 @@ button.like {
 
 article {
   color: rgb(218, 134, 213);
+  margin: 10px;
   /* color: rgb(162, 98, 222); */
 }
 
 .post {
   background-color: lavender;
+  /* height: 50px; */
+  border: 2px solid;
+  border-color: blueviolet;
 }
 
 textarea {
   height: 150px;
 }
+
+

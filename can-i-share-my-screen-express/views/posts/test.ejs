@@ -1,36 +1,50 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<%- include('../partials/header'); %>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
+<%posts.forEach(function(post){%>
+  <%const user = usersFromPosts[post.user.toString()]%>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8 ml-auto post d-flex align-items-center">
+        <label><%= user.name %></label>
+        <img src="<%=user.avatar%>" alt="" style="height:50px">
+        <label><%= post.createdAt.toLocaleString() %></label>
+        <h3><%=post.title%></h3>
+        <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
+          <div class=“dropdown d-inline-block”>
+            <button class=“btn btn-secondary dropdown-toggle” type=“button” id=“dropdownMenuButton1" data-bs-toggle=“dropdown” aria-expanded=“false”>...</button>
+            <ul class=“dropdown-menu” aria-labelledby=“dropdownMenuButton1">
+              <li><a class=“dropdown-item” href=“/posts/<%= post._id %>/edit”>Edit</a></li>
+              <form class=“dropdown-item” action=“/posts/<%= post._id %>?_method=DELETE” method=“POST”>
+                <button type=“submit”>Delete Post</button>
+              </form>
+            </ul>
+          </div>
+          <%};%>
+      </div>
     </div>
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
-  </body>
-</html>
+      
+    <div class="row">
+      <div class="col-md-8 ml-auto post">
+        <article><%= post.contents %></article>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 ml-auto post">
+        <a href="/posts/<%=post._id%>">View post </a>
+      </div>
+    </div>
+    <% if ( currentUserId){ %>
+      <div class="row">
+        <div class="col-md-8 ml-auto post">
+          <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
+        </div>
+      </div> 
+    <% }; %> 
+    <div class="row">
+      <div class="col-md-8 ml-auto post">
+        <h3>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </h3>
+      </div>
+    </div>
+  </div>
+  <%});%>
+<%- include('../partials/footer'); %>
