@@ -12,9 +12,9 @@ const ensureLoggedIn = require('../config/ensureLoggedIn');
 //   res.render('index', { title: 'CISMS' });
 // });
 
-router.get('/', function(req, res, next) {
-  res.redirect('/posts/all');
-})
+router.get('/', function(req, res) {
+  res.render('index', { title: 'CISMS'})
+});
 
 router.get('/posts', function(req, res, next) {
   res.redirect('/posts/all');

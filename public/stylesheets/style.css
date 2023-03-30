@@ -81,3 +81,12 @@ textarea {
   height: 30vh;
   white-space: pre-wrap;
 }
+
+#landing-logo {
+  width: 80vw;
+  margin-top: -15vh;
+}
+
+#landing-login {
+  margin-top: -15vh;
+}
