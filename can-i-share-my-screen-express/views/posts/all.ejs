@@ -9,12 +9,15 @@
       <label><%= post.createdAt.toLocaleString() %></label>
       <h3><%=post.title%></h3>
       <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</button>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#"></a>
-        </div>
+      <<div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
+              </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
       </div>
       <%};%>
     </div>
@@ -34,6 +37,6 @@
     <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
     <% }; %>
     <h3>Likes:<%= post.likes.length || 0; %> Comments:<%= post.comments.length || 0; %> </h3>
-  <%});%>
   </div>
+  <%});%>
 <%- include('../partials/footer'); %>

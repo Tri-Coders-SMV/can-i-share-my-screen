@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 async function showAll(req, res) {
   const currentUserId = req.user ? req.user._id : null;
-  const posts = await Post.find({});
+  const posts = await Post.find({}).sort({createdAt: -1});;
   const usersFromPosts = {};
 
   for (let i = 0; i < posts.length; i++) {
