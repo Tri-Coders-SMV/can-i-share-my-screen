@@ -1,61 +1,141 @@
 <%- include('../partials/header'); %>
-    <input type="button" value="Back" onclick="history.back()"><br><br>
-    <article>
-      <%console.log(post.likes)%>
-    <label><%=postUser.name%></label>
-    <img src="<%=postUser.avatar%>" alt="" style="height:50px">
-    <label><%=post.createdAt.toLocaleString()%></label>
-    <div>Title: </div>
-    <div>
-      <%= post.title %>
+
+  <div class="post postContainer border-4 container mt-4 pt-2 pb-2">
+    <div class="flex-row d-flex justify-content-between">
+    <div class="d-inline-block">
+      <img src="<%= postUser.avatar ? postUser.avatar : 'https://i.imgur.com/JqEj7pe.png' %>" class="post rounded-circle" alt="" style="height:50px">
     </div>
-    <div> contents: </div>
-    <div>
-      <%= post.contents %>
+
+    <div class="d-inline-block">
+      <label><%= postUser.name %></label>
     </div>
-    <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
-      <a href="/posts/<%=post._id%>/edit">Edit Post</a>
-      <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete Post</button>
-      </form>
-      <% }; %>
-    <% if(currentUserId){ %> 
-    <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
-    <% }; %>
-    <h3>Likes:<%= post.likes.length || 0; %></h3>
-    <%post.comments.forEach(function(comment){ %>
-    <section>`
-      <div>contents</div>
-      <%const userFromComment = usersFromComments[post.user.toString()];%>
-        <label><%=userFromComment.name%></label>
-        <img src="<%=userFromComment.avatar%>" alt="" style="height:50px">
-        <label><%=post.createdAt.toLocaleString()%></label>
-      <% if (editCommentId && comment._id.toString() === editCommentId) { %>
-        <form action="/posts/<%= post._id%>/<%=comment._id.toString() %>?_method=PUT" method="POST">
-          <textarea name="editedComment"><%= comment.contents %></textarea>
-          <button type="submit">Edit Comment</button>
-        </form>
-      <% } else { %>
-      <div> <%= comment.contents %> </div>
-      <a href="/posts/<%= post._id %>/<%= comment._id %>">Edit Comment</a>
-      <% }; %>
-      <form action="/posts/<%= post._id %>/comments?_method=DELETE" method="POST">
-        <input style="display: none" name="commentId" value="<%= comment._id %>">
-        <button type="submit">X</button>
-      </form>
-      <% if(currentUserId){ %> 
-      <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like">like</button></form>
-      <% }; %>
-      <h3>Likes:<%= comment.likes.length || 0; %></h3>
+
+    <div class="d-inline-block d-flex">
+      <label><%= post.createdAt.toLocaleString() %></label>
+    </div>
+
+      <div>
+        <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      ...
+                  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/posts/<%= post._id %>/edit">Edit</a></li>
+              <form class="dropdown-item" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete Post</button>
+              </form>
+            </ul>
+          </div>
+        <%};%>
+      </div>
+    </div>
+
+      <div class="mt-2">
+        <a href="/posts/<%= post._id %>">
+          <h3><%=post.title%></h3>
+        </a>
+      </div>
+
+
+
+    <div class="row m-2 post">
+        <p class="post-contents"><%= post.contents %></p>
+    </div>
+
+    <div class="d-flex flex-row justify-content-between">
+      
+    <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
+
+
+    <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
+
+
+  </div>
+
+  <%post.comments.forEach(function(comment){ %>
+    <% commentUser = usersFromComments[comment.user.toString()]; %>
+
+    <!-- FIRST COMMENT ROW -->
+
+    <div class="d-flex flex-row justify-content-between mt-4">
+
+      <div class="d-inline-block">
+        <img src="<%= commentUser.avatar ? commentUser.avatar : 'https://i.imgur.com/JqEj7pe.png' %>" class="post rounded-circle" alt="" style="height:50px">
+      </div>
+  
+      <div class="d-inline-block">
+        <label><%= commentUser.name %></label>
+        <% console.log(commentUser, currentUserId) %> 
+      </div>
+
+      <div class="d-inline-block">
+        <label>
+          <%= comment.createdAt.toLocaleString() %></label>
+        </label>
+      </div>
+
+      <% if (currentUserId && commentUser._id.toString() === currentUserId.toString()) { %>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      ...
+                  </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/posts/<%= post._id %>/<%= comment._id %>">Edit Comment</a></li>
+              <form class="dropdown-item" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                <input style="display: none" name="commentId" value="<%= comment._id %>">
+                <button type="submit" style="color:white">Delete Comment</button>
+              </form>
+            </ul>
+          </div>
+          <%};%>
+    </div>
+    
+    <!-- SECOND COMMENT ROW -->
+
+    <div class="d-flex flex-row mt-2 post">
+  
+      <div class="d-inline-block d-flex">
+        <% if (editCommentId && commentUser._id.toString() === editCommentId) { %>
+          <div>
+            <form action="/posts/<%= post._id%>/comments/<%=comment._id.toString() %>?_method=PUT" method="POST">
+              <textarea class="post-contents" name="editedComment"><%= comment.contents %></textarea><br>
+              <button type="submit">Edit Comment</button>
+            </form>
+          </div>
+        <% } else { %>
+        <div class="post-contents"><%= comment.contents %>
+        </div>
+        <% }; %>
+      </div>
+
+    </div>
+
+    <!-- THIRD COMMENT ROW -->
+
+    <div class="d-flex mt-2 flex-row justify-content-between">
+      <div>
+      <% if (currentUserId && commentUser._id.toString() === currentUserId.toString()) { %>
+        <a href="/posts/<%= post._id %>/<%= comment._id %>/edit">Edit Comment</a>
+        <% }; %>
+      </div>
+      <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like"><%= comment.likes.length ? `${comment.likes.length} likes` : 'like' %></button></form>
     </form>
-     </section>
+    </div>
     <% }); %>
+  
+
+    <!-- END EXISTING COMMENTS -->
+
     <% if ( currentUserId){ %>
     <form method="POST" action="/posts/<%= post._id %>/comments/">
-        <div>add comment</div>
-        <textarea name="contents"></textarea>
-        <button type="submit"> Add comment</button>
+        <textarea class="post-contents" name="contents"></textarea><br>
+        <button type="submit">Add comment</button>
     </form>
     <% }; %>
-    </article>
+  </div>
+
+  </div>
+
+  
 <%- include('../partials/footer'); %>
