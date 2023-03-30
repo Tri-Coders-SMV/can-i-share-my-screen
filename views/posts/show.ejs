@@ -32,9 +32,7 @@
     </div>
 
       <div class="mt-2">
-        <a href="/posts/<%= post._id %>">
-          <h3><%=post.title%></h3>
-        </a>
+        <h3><%=post.title%></h3>
       </div>
 
 
@@ -45,7 +43,7 @@
 
     <div class="d-flex flex-row justify-content-between">
       
-    <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
+    <p><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></p>
 
 
     <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
@@ -55,9 +53,9 @@
 
   <%post.comments.forEach(function(comment){ %>
     <% commentUser = usersFromComments[comment.user.toString()]; %>
-
+    <div class="comment-seperator">
     <!-- FIRST COMMENT ROW -->
-
+    
     <div class="d-flex flex-row justify-content-between mt-4">
 
       <div class="d-inline-block">
@@ -66,7 +64,6 @@
   
       <div class="d-inline-block">
         <label><%= commentUser.name %></label>
-        <% console.log(commentUser, currentUserId) %> 
       </div>
 
       <div class="d-inline-block">
@@ -81,7 +78,7 @@
                       ...
                   </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/posts/<%= post._id %>/<%= comment._id %>">Edit Comment</a></li>
+              <li><a class="dropdown-item" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit">Edit Comment</a></li>
               <form class="dropdown-item" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                 <input style="display: none" name="commentId" value="<%= comment._id %>">
                 <button type="submit" style="color:white">Delete Comment</button>
@@ -93,49 +90,57 @@
     
     <!-- SECOND COMMENT ROW -->
 
-    <div class="d-flex flex-row mt-2 post">
+    <div class="row m-2 post">
   
-      <div class="d-inline-block d-flex">
-        <% if (editCommentId && commentUser._id.toString() === editCommentId) { %>
+      <div class="d-inline-block d-flex p-0">
+        <% console.log(editCommentId, comment._id.toString()); %>
+        <% if (editCommentId && editCommentId === comment._id.toString() && commentUser._id.toString() === currentUserId.toString()) { %>
           <div>
             <form action="/posts/<%= post._id%>/comments/<%=comment._id.toString() %>?_method=PUT" method="POST">
-              <textarea class="post-contents" name="editedComment"><%= comment.contents %></textarea><br>
-              <button type="submit">Edit Comment</button>
-            </form>
-          </div>
-        <% } else { %>
-        <div class="post-contents"><%= comment.contents %>
+              <textarea class="post-contents edit-comment input-field" name="editedComment"><%= comment.contents %></textarea><br>
         </div>
+        <% } else { %>
+        <p class="comment-contents"><%= comment.contents %>
+        </p>
         <% }; %>
       </div>
+      </div>
 
-    </div>
 
     <!-- THIRD COMMENT ROW -->
 
-    <div class="d-flex mt-2 flex-row justify-content-between">
+    <div class="d-flex mt-2 mb-2 flex-row justify-content-between">
       <div>
-      <% if (currentUserId && commentUser._id.toString() === currentUserId.toString()) { %>
-        <a href="/posts/<%= post._id %>/<%= comment._id %>/edit">Edit Comment</a>
+        <% if (editCommentId && editCommentId === comment._id.toString() && commentUser._id.toString() === currentUserId.toString()) { %>
+            <button type="submit">Update Comment</button>
+          </form>
         <% }; %>
       </div>
-      <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like"><%= comment.likes.length ? `${comment.likes.length} likes` : 'like' %></button></form>
-    </form>
+      <div class="mr-2">
+        <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like"><%= comment.likes.length ? `${comment.likes.length} likes` : 'like' %></button></form>
+        </form>
+      </div>
     </div>
+  </div>
     <% }); %>
   
 
     <!-- END EXISTING COMMENTS -->
 
     <% if ( currentUserId){ %>
-    <form method="POST" action="/posts/<%= post._id %>/comments/">
-        <textarea class="post-contents" name="contents"></textarea><br>
-        <button type="submit">Add comment</button>
-    </form>
+      <div class="comment-seperator">
+    <div class="d-flex flex-row mt-4 justify-content-center">
+      <form method="POST" action="/posts/<%= post._id %>/comments/">
+          <textarea class="post-contents post comment-text-area input-field" name="contents"></textarea><br>
+          <button type="submit">Add comment</button>
+      </form>
+    </div>
+  </div>
     <% }; %>
   </div>
 
   </div>
+
 
   
 <%- include('../partials/footer'); %>

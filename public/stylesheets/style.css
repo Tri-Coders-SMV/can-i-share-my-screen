@@ -25,6 +25,9 @@ a {
 
 button {
   background-color: blueviolet;
+  color: white;
+  border-style: solid;
+  border-radius: 5px;
 }
 
 button.like {
@@ -46,6 +49,7 @@ article {
 
 textarea {
   height: 150px;
+  white-space: pre-wrap;
 }
 
 .postContainer {
@@ -64,6 +68,13 @@ textarea {
 .post-contents {
   padding: 10px 10px 0 10px;
   word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.comment-contents {
+  padding: 10px 10px 0 10px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .dropdown-toggle {
@@ -72,4 +83,35 @@ textarea {
 
 .dropdown-toggle:hover {
   background-color: rgb(159, 88, 225);
+}
+
+.comment-text-area {
+  width: 55vw;
+  height: 30vh;
+  white-space: pre-wrap;
+}
+
+#landing-logo {
+  width: 80vw;
+  margin-top: -15vh;
+}
+
+#landing-login {
+  margin-top: -15vh;
+}
+
+.edit-comment {
+  width: 55.7vw;
+  height: 20vh;
+  margin-bottom: -4px;
+  white-space: pre-wrap;
+}
+
+.comment-seperator {
+  border-top: .5min;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-style: solid;
+  border-color: darkgrey;
 }
