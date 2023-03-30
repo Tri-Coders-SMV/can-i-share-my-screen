@@ -1,61 +1,9 @@
 <%- include('../partials/header'); %>
-    <input type="button" value="Back" onclick="history.back()"><br><br>
-    <article>
-    <label><%=postUser.name%></label>
-    <img src="<%=postUser.avatar%>" alt="" style="height:50px">
-    <label><%=post.createdAt.toLocaleString()%></label>
-    <div>Title: </div>
-    <div>
-      <%= post.title %>
-    </div>
-    <div> contents: </div>
-    <div>
-      <%= post.contents %>
-    </div>
-    <% if(currentUserId && post.user.toString() === currentUserId.toString() ) { %>
-      <a href="/posts/<%=post._id%>/edit">Edit Post</a>
-      <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete Post</button>
-      </form>
-      <% }; %>
-    <% if(currentUserId){ %> 
-    <form action="/posts/<%=post._id%>/likes" method="POST"><button type="submit" name="like">like</button></form>
-    <% }; %>
-    <h3>Likes:<%= post.likes.length || 0; %></h3>
-    
-    <%post.comments.forEach(function(comment){ %>
-    <section>`
-      <div>contents</div>
-      <%const userFromComment = usersFromComments[post.user.toString()];%>
-        <label><%=userFromComment.name%></label>
-        <img src="<%=userFromComment.avatar%>" alt="" style="height:50px">
-        <label><%=post.createdAt.toLocaleString()%></label>
-      <% if (editCommentId && comment._id.toString() === editCommentId) { %>
-        <form action="/posts/<%= post._id%>/<%=comment._id.toString() %>?_method=PUT" method="POST">
-          <textarea name="editedComment"><%= comment.contents %></textarea>
-          <button type="submit">Edit Comment</button>
-        </form>
-      <% } else { %>
-      <div> <%= comment.contents %> </div>
-      <a href="/posts/<%= post._id %>/<%= comment._id %>">Edit Comment</a>
-      <% }; %>
-      <form action="/posts/<%= post._id %>/comments?_method=DELETE" method="POST">
-        <input style="display: none" name="commentId" value="<%= comment._id %>">
-        <button type="submit">X</button>
-      </form>
-      <% if(currentUserId){ %> 
-      <form action="/posts/<%= post._id%>/<%=comment._id %>/likes" method="POST"><button type="submit" name="like">like</button></form>
-      <% }; %>
-      <h3>Likes:<%= comment.likes.length || 0; %></h3>
-    </form>
-     </section>
-    <% }); %>
-    <% if ( currentUserId){ %>
-    <form method="POST" action="/posts/<%= post._id %>/comments/">
-        <div>add comment</div>
-        <textarea name="contents"></textarea>
-        <button type="submit"> Add comment</button>
-    </form>
-    <% }; %>
-    </article>
+
+<form action="/posts/<%= post._id %>?_method=PUT" method="POST">
+    <label>Title <input type="text" name="title" value="<%= post.title %>"></label><br><br>
+    <label>const myProblem = { ....<textarea name="contents"><%= post.contents %></textarea></label><br><br>
+    <button type="submit">EDIT POST</button>
+  </form>
+
 <%- include('../partials/footer'); %>

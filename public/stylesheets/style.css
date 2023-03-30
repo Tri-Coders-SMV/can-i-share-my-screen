@@ -73,3 +73,8 @@ textarea {
 .dropdown-toggle:hover {
   background-color: rgb(159, 88, 225);
 }
+
+.comment-text-area {
+  width: 55vw;
+  height: 30vh;
+}
