@@ -10,9 +10,9 @@ const commentsCtrl = require('../controllers/comments')
 
 // Every url below starts with /posts
 router.post('/:id/comments', commentsCtrl.addComment);
-router.get('/:id/:cid', commentsCtrl.editComment);
+router.get('/:id/:cid/edit', commentsCtrl.editComment);
 router.put('/:id/:cid', commentsCtrl.updateComment);
-router.delete('/:id/comments', commentsCtrl.deleteOneComment);
+router.delete('/:id/comments/:cid', commentsCtrl.deleteOneComment);
 router.post('/:id/:cid/likes', commentsCtrl.addLike);
 
 module.exports = router;

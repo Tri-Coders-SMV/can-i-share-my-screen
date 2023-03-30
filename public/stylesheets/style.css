@@ -1,0 +1,75 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: black;
+  color: rgb(235, 70, 215);
+  font-family: 'Rubik', sans-serif;
+}
+
+a {
+  color: blueviolet;
+  text-decoration: none;
+}
+
+/* lesson CSS for login */
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+}
+
+.login img {
+  height: 30px;
+}
+
+button {
+  background-color: blueviolet;
+}
+
+button.like {
+  background: url(https://flyclipart.com/thumb2/purple-facebook-like-icon-744456.png);
+}
+
+article {
+  color: rgb(218, 134, 213);
+  margin: 10px;
+  /* color: rgb(162, 98, 222); */
+}
+
+.post {
+  background-color: lavender;
+  /* height: 50px; */
+  border: 2px solid;
+  border-color: blueviolet;
+}
+
+textarea {
+  height: 150px;
+}
+
+.postContainer {
+  border: 2px;
+  border-style: solid;
+  border-color: rgb(252, 57, 243);
+  border-radius: 20px;
+  margin: 0 auto;
+  width: 60vw;
+}
+
+.input-field {
+  background-color: rgb(240, 240, 248);
+}
+
+.post-contents {
+  padding: 10px 10px 0 10px;
+  word-wrap: break-word;
+}
+
+.dropdown-toggle {
+  background-color: blueviolet;
+}
+
+.dropdown-toggle:hover {
+  background-color: rgb(159, 88, 225);
+}
