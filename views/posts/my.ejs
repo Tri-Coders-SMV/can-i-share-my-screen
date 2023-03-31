@@ -38,13 +38,13 @@
 
 
 
-    <div class="row m-2 post">
+    <div class="row m-2 post content-background">
         <p class="post-contents"><%= post.contents %></p>
     </div>
 
     <div class="d-flex flex-row justify-content-between">
       
-    <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
+    <a href="/posts/<%=post._id%>"><%= post.comments.length ? (post.comments.length > 1 ? `See ${post.comments.length} comments...` : 'See 1 comment...') : "Be the first to comment"%></a>
 
     <div flex-row>
       <form action="/posts/my/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>

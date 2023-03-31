@@ -32,18 +32,18 @@
     </div>
 
       <div class="mt-2">
-        <h3><%=post.title%></h3>
+        <h3 class="title"><%=post.title%></h3>
       </div>
 
 
 
-    <div class="row m-2 post">
+    <div class="row m-2 content-background post">
         <p class="post-contents"><%= post.contents %></p>
     </div>
 
     <div class="d-flex flex-row justify-content-between">
       
-    <p><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></p>
+    <p><%= post.comments.length ? (post.comments.length > 1 ? `See ${post.comments.length} comments...` : 'See 1 comment...') : "Be the first to comment"%></p>
 
 
     <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
@@ -90,7 +90,7 @@
     
     <!-- SECOND COMMENT ROW -->
 
-    <div class="row m-2 post">
+    <div class="row m-2 post content-background">
   
       <div class="d-inline-block d-flex p-0">
         <% console.log(editCommentId, comment._id.toString()); %>
@@ -131,7 +131,7 @@
       <div class="comment-seperator">
     <div class="d-flex flex-row mt-4 justify-content-center">
       <form method="POST" action="/posts/<%= post._id %>/comments/">
-          <textarea class="post-contents post comment-text-area input-field" name="contents"></textarea><br>
+          <textarea class="post-contents post comment-text-area input-field" name="contents" placeholder="Add a comment..."></textarea><br>
           <button type="submit">Add comment</button>
       </form>
     </div>

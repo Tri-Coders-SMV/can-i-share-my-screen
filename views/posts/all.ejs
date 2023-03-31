@@ -5,7 +5,7 @@
   <div class="post postContainer border-4 container mt-4 pt-2 pb-2">
     <div class="flex-row d-flex justify-content-between">
     <div class="d-inline-block">
-      <img src="<%= user.avatar ? user.avatar : 'https://i.imgur.com/JqEj7pe.png' %>" class="post rounded-circle" alt="" style="height:50px">
+      <img src="<%= user.avatar ? user.avatar : 'https://i.imgur.com/JqEj7pe.png' %>" class="post rounded-circle" alt=" " style="height:50px">
     </div>
 
     <div class="d-inline-block">
@@ -35,19 +35,19 @@
 
       <div class="mt-2">
         <a href="/posts/<%= post._id %>">
-          <h3><%=post.title%></h3>
+          <h3 class="title"><%=post.title%></h3>
         </a>
       </div>
 
 
 
-    <div class="row m-2 post">
+    <div class="row m-2 post content-background">
         <p class="post-contents"><%= post.contents %></p>
     </div>
 
     <div class="d-flex flex-row justify-content-between">
       
-    <a href="/posts/<%=post._id%>"><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></a>
+    <a href="/posts/<%=post._id%>"><%= post.comments.length ? (post.comments.length > 1 ? `See ${post.comments.length} comments...` : 'See 1 comment...') : "Be the first to comment"%></a>
 
 
     <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
