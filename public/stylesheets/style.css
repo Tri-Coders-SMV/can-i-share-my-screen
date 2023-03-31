@@ -179,6 +179,10 @@ label {
     width: 80vw;
   }
 
+  #navbarSupportedContent {
+    background-color: rgb(40, 9, 47);
+  }
+
   .post-contents {
     font-size: 3vmin;
   }
