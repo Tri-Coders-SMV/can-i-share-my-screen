@@ -28,15 +28,24 @@
 
 
 
-# Screenshot
+# Screenshots
 
 - Landing page
 - All posts page
 - Show post page
 - Gif demo
 
-<img src="url to your image on imgur">
-<img src="url to your image on imgur">
+![Landing page](https://i.imgur.com/DXNloN1.png)
+Landing page
+
+![All posts page](https://i.imgur.com/hNKf6F4.png)
+All posts Page
+
+![Show post page](https://i.imgur.com/dFgwzDM.png)
+Show post
+
+*Demo*
+![Demo](demo.gif)
 
 # Technologies Used
 
