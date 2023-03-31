@@ -3,15 +3,6 @@ const router = express.Router();
 
 const passport = require('passport');
 
-// add this function for any routes where
-// we want to make sure a user is logged in
-const ensureLoggedIn = require('../config/ensureLoggedIn');
-
-/* GET landing page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'CISMS' });
-// });
-
 router.get('/', function(req, res) {
   res.render('index', { title: 'CISMS'})
 });
@@ -34,7 +25,6 @@ router.get('/auth/google', passport.authenticate(
 router.get('/oauth2callback', passport.authenticate(
   'google',
   {
-    // *** we could potentially name the main post page 'all'
     successRedirect: '/posts/all',
     failureRedirect: '/posts/all'
   }

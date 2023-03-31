@@ -1,16 +1,28 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: black;
+  background: rgb(21, 4, 24);
   color: rgb(235, 70, 215);
   font-family: 'Rubik', sans-serif;
 }
 
 a {
-  color: blueviolet;
+  color: rgb(173, 41, 213);
   text-decoration: none;
+  font-size: 2vmin;
 }
 
-/* lesson CSS for login */
+p {
+  margin-top: .5vmin;
+  font-size: 2vmin;
+}
+
+nav {
+  background-color: rgb(40, 9, 47);
+}
+
+.title {
+  color: rgb(226, 187, 237);
+}
 
 .login {
   display: flex;
@@ -24,10 +36,12 @@ a {
 }
 
 button {
-  background-color: blueviolet;
-  color: white;
+  background-color: rgb(193, 116, 189);
+  color: rgb(86, 21, 102);
   border-style: solid;
+  border-color: rgb(160, 83, 233);
   border-radius: 5px;
+  font-size: 2vmin;
 }
 
 button.like {
@@ -37,56 +51,79 @@ button.like {
 article {
   color: rgb(218, 134, 213);
   margin: 10px;
-  /* color: rgb(162, 98, 222); */
 }
 
 .post {
-  background-color: lavender;
-  /* height: 50px; */
+  background-color: rgb(40, 9, 47);
   border: 2px solid;
-  border-color: blueviolet;
+  border-color: rgb(173, 41, 213);
 }
 
 textarea {
   height: 150px;
   white-space: pre-wrap;
+  color: rgb(250, 250, 230);
+  font-family: 'PT Mono', monospace;
+}
+
+input {
+  color: rgb(250, 250, 230);
+  font-family: 'PT Mono', monospace;
 }
 
 .postContainer {
   border: 2px;
   border-style: solid;
-  border-color: rgb(252, 57, 243);
+  border-color: rgb(218, 144, 213);
   border-radius: 20px;
   margin: 0 auto;
-  width: 60vw;
+  width: 80vw;
+}
+
+label {
+  color: rgb(226, 187, 237);
+  font-size: 2vmin;
 }
 
 .input-field {
-  background-color: rgb(240, 240, 248);
+  background-color: rgb(28, 7, 33);
 }
 
 .post-contents {
   padding: 10px 10px 0 10px;
   word-wrap: break-word;
   white-space: pre-wrap;
+  color: rgb(250, 250, 230);
+  font-family: 'PT Mono', monospace;
+}
+
+.content-background {
+  background-color: rgb(28, 7, 33);
 }
 
 .comment-contents {
   padding: 10px 10px 0 10px;
   word-wrap: break-word;
   white-space: pre-wrap;
+  color: rgb(250, 250, 230);
+  font-family: 'PT Mono', monospace;
 }
 
 .dropdown-toggle {
-  background-color: blueviolet;
+  background-color: rgb(193, 116, 189);
+  color: rgb(250, 250, 230);
 }
 
 .dropdown-toggle:hover {
-  background-color: rgb(159, 88, 225);
+  background-color: rgb(140, 82, 136);
+}
+
+#edit-dropdown-button {
+  color: rgb(173, 41, 213);
 }
 
 .comment-text-area {
-  width: 55vw;
+  width: 73.5vw;
   height: 30vh;
   white-space: pre-wrap;
 }
@@ -98,10 +135,13 @@ textarea {
 
 #landing-login {
   margin-top: -15vh;
+  font-size: 5vmin;
+  font-family: 'PT Mono', monospace;
+  text-align: center;
 }
 
 .edit-comment {
-  width: 55.7vw;
+  width: 73.5vw;
   height: 20vh;
   margin-bottom: -4px;
   white-space: pre-wrap;
@@ -114,4 +154,37 @@ textarea {
   border-bottom: 0;
   border-style: solid;
   border-color: darkgrey;
+}
+
+@media only screen and (max-width: 670px)  {
+  #landing-login {
+    font-size: 8vmin;
+    margin-top: -10vmin;
+  }
+
+  nav {
+    height: 15vmin;
+  }
+
+  #nav-logo {
+    height: 12vmin;
+  }
+
+  #landing-logo {
+    width: 80vmin;
+    margin-top: -5vh;
+  }
+
+  .postContainer {
+    width: 80vw;
+  }
+
+  #navbarSupportedContent {
+    background-color: rgb(40, 9, 47);
+  }
+
+  .post-contents {
+    font-size: 3vmin;
+  }
+
 }
