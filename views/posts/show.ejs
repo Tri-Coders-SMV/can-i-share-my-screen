@@ -11,7 +11,7 @@
     </div>
 
     <div class="d-inline-block d-flex">
-      <label><%= post.createdAt.toLocaleString() %></label>
+      <label><%= post.createdAt.toLocaleTimeString([], {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}); %></label>
     </div>
 
       <div>
@@ -20,8 +20,8 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       ...
                   </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/posts/<%= post._id %>/edit">Edit</a></li>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" id="edit-dropdown-button" href="/posts/<%= post._id %>/edit">Edit</a></li>
               <form class="dropdown-item" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
                 <button type="submit">Delete Post</button>
               </form>
@@ -32,18 +32,18 @@
     </div>
 
       <div class="mt-2">
-        <h3><%=post.title%></h3>
+        <h3 class="title"><%=post.title%></h3>
       </div>
 
 
 
-    <div class="row m-2 post">
+    <div class="row m-2 content-background post">
         <p class="post-contents"><%= post.contents %></p>
     </div>
 
-    <div class="d-flex flex-row justify-content-between">
+    <div class="d-flex mb-2 flex-row justify-content-between">
       
-    <p><%= post.comments.length ? `See ${post.comments.length} comments...` : "Be the first to comment"%></p>
+    <p><%= post.comments.length ? (post.comments.length > 1 ? `See ${post.comments.length} comments...` : 'See 1 comment...') : "Be the first to comment"%></p>
 
 
     <form action="/posts/all/<%=post._id%>/likes" method="POST"><button type="submit" name="like"><%= post.likes.length ? `${post.likes.length} interested` : "I'm interested"%></button></form>
@@ -68,7 +68,7 @@
 
       <div class="d-inline-block">
         <label>
-          <%= comment.createdAt.toLocaleString() %></label>
+          <%= comment.createdAt.toLocaleTimeString([], {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}); %></label>
         </label>
       </div>
 
@@ -77,8 +77,8 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       ...
                   </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit">Edit Comment</a></li>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" id="edit-dropdown-button" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit">Edit Comment</a></li>
               <form class="dropdown-item" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                 <input style="display: none" name="commentId" value="<%= comment._id %>">
                 <button type="submit" style="color:white">Delete Comment</button>
@@ -90,10 +90,9 @@
     
     <!-- SECOND COMMENT ROW -->
 
-    <div class="row m-2 post">
+    <div class="row m-2 post content-background">
   
       <div class="d-inline-block d-flex p-0">
-        <% console.log(editCommentId, comment._id.toString()); %>
         <% if (editCommentId && editCommentId === comment._id.toString() && commentUser._id.toString() === currentUserId.toString()) { %>
           <div>
             <form action="/posts/<%= post._id%>/comments/<%=comment._id.toString() %>?_method=PUT" method="POST">
@@ -109,7 +108,7 @@
 
     <!-- THIRD COMMENT ROW -->
 
-    <div class="d-flex mt-2 mb-2 flex-row justify-content-between">
+    <div class="d-flex mt-2 mb-4 flex-row justify-content-between">
       <div>
         <% if (editCommentId && editCommentId === comment._id.toString() && commentUser._id.toString() === currentUserId.toString()) { %>
             <button type="submit">Update Comment</button>
@@ -131,7 +130,7 @@
       <div class="comment-seperator">
     <div class="d-flex flex-row mt-4 justify-content-center">
       <form method="POST" action="/posts/<%= post._id %>/comments/">
-          <textarea class="post-contents post comment-text-area input-field" name="contents"></textarea><br>
+          <textarea class="post-contents post comment-text-area input-field" name="contents" placeholder="Add a comment..."></textarea><br>
           <button type="submit">Add comment</button>
       </form>
     </div>
