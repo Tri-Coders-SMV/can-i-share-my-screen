@@ -93,7 +93,6 @@
     <div class="row m-2 post content-background">
   
       <div class="d-inline-block d-flex p-0">
-        <% console.log(editCommentId, comment._id.toString()); %>
         <% if (editCommentId && editCommentId === comment._id.toString() && commentUser._id.toString() === currentUserId.toString()) { %>
           <div>
             <form action="/posts/<%= post._id%>/comments/<%=comment._id.toString() %>?_method=PUT" method="POST">

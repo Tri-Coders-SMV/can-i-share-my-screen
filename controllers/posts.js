@@ -148,7 +148,6 @@ async function addLike(req, res) {
   if(!req.user){
     res.redirect('/auth/google');
   } else {
-    console.log(req.user);
     const userId = req.user._id;
     const post = await Post.findById(req.params.id);
     if (post.likes.includes(req.user._id)){
@@ -158,9 +157,7 @@ async function addLike(req, res) {
       post.likes.push(req.user._id);
     }
     await post.save();
-    console.log(req.url)
     const url = req.url.toString()
-    console.log(url);
     if (url.includes('all')) {
       res.redirect('/posts/all')
     } else if (url.includes('my')) {

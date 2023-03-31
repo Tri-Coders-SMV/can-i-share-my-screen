@@ -5,11 +5,6 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
-/* rgb(12, 3, 15) */
-/* rgb(18, 4, 21) */
-/* rgb(21, 4, 24) */
-/* rgb(27, 7, 32); */
-
 a {
   color: rgb(173, 41, 213);
   text-decoration: none;
@@ -24,7 +19,6 @@ p {
 nav {
   background-color: rgb(40, 9, 47);
 }
-/* lesson CSS for login */
 
 .title {
   color: rgb(226, 187, 237);
@@ -57,13 +51,10 @@ button.like {
 article {
   color: rgb(218, 134, 213);
   margin: 10px;
-  /* color: rgb(162, 98, 222); */
 }
-/* rgb(35, 8, 41) */
 
 .post {
   background-color: rgb(40, 9, 47);
-  /* height: 50px; */
   border: 2px solid;
   border-color: rgb(173, 41, 213);
 }
@@ -191,6 +182,5 @@ label {
   .post-contents {
     font-size: 3vmin;
   }
-
 
 }

@@ -40,7 +40,6 @@ async function deleteOneComment(req, res, next) {
       res.redirect(`posts/${req.params.id}`);
     } else {
       comment = await Comment.findById(req.params.cid);
-      console.log(comment.user.toString(), req.user._id.toString());
       if (!comment.user.toString() === req.user._id.toString) {
         res.redirect(`posts/${req.params.id}`);
       } else {
@@ -48,7 +47,6 @@ async function deleteOneComment(req, res, next) {
         if (!post) {
           return res.redirect("/posts/all")
         } else {
-          console.log('cid', req.params.cid);
           await post.comments.remove(req.params.cid);
           await Comment.deleteOne(comment);
           await post.save();
