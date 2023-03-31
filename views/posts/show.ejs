@@ -11,7 +11,7 @@
     </div>
 
     <div class="d-inline-block d-flex">
-      <label><%= post.createdAt.toLocaleString() %></label>
+      <label><%= post.createdAt.toLocaleTimeString([], {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}); %></label>
     </div>
 
       <div>
@@ -20,8 +20,8 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       ...
                   </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/posts/<%= post._id %>/edit">Edit</a></li>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" id="edit-dropdown-button" href="/posts/<%= post._id %>/edit">Edit</a></li>
               <form class="dropdown-item" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
                 <button type="submit">Delete Post</button>
               </form>
@@ -41,7 +41,7 @@
         <p class="post-contents"><%= post.contents %></p>
     </div>
 
-    <div class="d-flex flex-row justify-content-between">
+    <div class="d-flex mb-2 flex-row justify-content-between">
       
     <p><%= post.comments.length ? (post.comments.length > 1 ? `See ${post.comments.length} comments...` : 'See 1 comment...') : "Be the first to comment"%></p>
 
@@ -68,7 +68,7 @@
 
       <div class="d-inline-block">
         <label>
-          <%= comment.createdAt.toLocaleString() %></label>
+          <%= comment.createdAt.toLocaleTimeString([], {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}); %></label>
         </label>
       </div>
 
@@ -77,8 +77,8 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       ...
                   </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit">Edit Comment</a></li>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" id="edit-dropdown-button" href="/posts/<%= post._id %>/comments/<%= comment._id %>/edit">Edit Comment</a></li>
               <form class="dropdown-item" action="/posts/<%= post._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                 <input style="display: none" name="commentId" value="<%= comment._id %>">
                 <button type="submit" style="color:white">Delete Comment</button>
@@ -109,7 +109,7 @@
 
     <!-- THIRD COMMENT ROW -->
 
-    <div class="d-flex mt-2 mb-2 flex-row justify-content-between">
+    <div class="d-flex mt-2 mb-4 flex-row justify-content-between">
       <div>
         <% if (editCommentId && editCommentId === comment._id.toString() && commentUser._id.toString() === currentUserId.toString()) { %>
             <button type="submit">Update Comment</button>

@@ -13,7 +13,7 @@
     </div>
 
       <div class="d-inline-block d-flex">
-        <label><%= post.createdAt.toLocaleString() %></label>
+        <label><%= post.createdAt.toLocaleTimeString([], {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}); %></label>
       </div>
 
       <div>
@@ -22,8 +22,8 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       ...
                   </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/posts/<%= post._id %>/edit">Edit</a></li>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" id="edit-dropdown-button" href="/posts/<%= post._id %>/edit">Edit</a></li>
               <form class="dropdown-item" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
                 <button type="submit">Delete Post</button>
               </form>
