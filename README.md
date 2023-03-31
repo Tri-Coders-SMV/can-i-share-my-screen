@@ -45,7 +45,7 @@ All posts Page
 Show post
 
 *Demo*
-![Demo](demo.gif)
+![Demo](gif-demo.gif)
 
 # Technologies Used
 
